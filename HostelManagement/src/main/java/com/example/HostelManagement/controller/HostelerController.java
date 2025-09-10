@@ -1,7 +1,6 @@
 package com.example.HostelManagement.controller;
 
 import com.example.HostelManagement.model.Hosteler;
-import com.example.HostelManagement.model.Payment;
 import com.example.HostelManagement.service.HostelerService;
 import com.example.HostelManagement.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -54,7 +52,7 @@ public class HostelerController {
     public ResponseEntity<?> add(@RequestBody Hosteler h) {
         try {
             Hosteler saved = service.add(h);
-            return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+            return ResponseEntity.status(HttpStatus.OK).body(saved);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Error: " + e.getMessage());
         }
@@ -85,15 +83,9 @@ public class HostelerController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
     }
-    //--------------------------//
-    @PostMapping("/payments")
-    public ResponseEntity<Payment> addPayment(@RequestBody Payment payment) {
-        Payment addedPayment = paymentService.add(payment);
-        return ResponseEntity.ok(addedPayment);
-    }
 
-    @GetMapping("/{id}/payments")
-    public ResponseEntity<List<Payment>> getPayments(@PathVariable String id) {
-        return ResponseEntity.ok(paymentService.getPayments(id));
+    @GetMapping("/room/{roomNo}")
+    public List<Hosteler> getHostelersByRoomNo(@PathVariable String roomNo) {
+        return service.findByRoomno(roomNo);
     }
 }

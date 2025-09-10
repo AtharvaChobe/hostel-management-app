@@ -1,38 +1,28 @@
 package com.example.HostelManagement.model;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Document(collection = "hostelers")
 public class Hosteler {
     @Id
     private String id;
-    private String name;
-
-//    public List<Payment> getPayments() {
-//        return payments;
-//    }
-
-//    public void setPayments(List<Payment> payments) {
-//        this.payments = payments;
-//    }
-
-//    private List<Payment> payments = new ArrayList<>();
-
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Hosteler{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", contact='" + contact + '\'' +
+                ", roomNo='" + roomNo + '\'' +
+                '}';
     }
 
     public String getRoomNo() {
@@ -66,7 +56,7 @@ public class Hosteler {
     public void setName(String name) {
         this.name = name;
     }
-
+    private String name;
     private String email;
     private String contact;
     private String roomNo;

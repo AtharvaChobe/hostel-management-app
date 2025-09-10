@@ -16,6 +16,17 @@ public class Payment {
         return id;
     }
 
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "id='" + id + '\'' +
+                ", hostelerId='" + hostelerId + '\'' +
+                ", month='" + month + '\'' +
+                ", amount=" + amount +
+                ", paymentDate=" + paymentDate +
+                '}';
+    }
+
     public void setId(String id) {
         this.id = id;
     }
