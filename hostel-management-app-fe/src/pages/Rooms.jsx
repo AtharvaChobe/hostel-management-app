@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import Spinner from '../components/Spinner';
 
 const Rooms = () => {
   // console.log(localStorage.getItem("token"))
@@ -64,8 +63,7 @@ const Rooms = () => {
     }
   }, [searchParam, List])
 
-  if (!filteredList) return <Spinner />
-  else return (
+  return (
     <div className='flex flex-col justify-center items-center gap-3'>
       <Link to={"/addrooms"}>
         <button className='btn'>Add a room</button>
