@@ -14,7 +14,7 @@ const AddPayment = () => {
     useEffect(() => {
         const fetchRooms = async () => {
             try {
-                const res = await axios.get("http://localhost:8080/api/room", {
+                const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/room`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     }
