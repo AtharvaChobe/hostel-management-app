@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+.primary{
+    @apply text-3xl text-gray-800
+}
+.secondary{
+    @apply text-2xl text-gray-600
+}
+.bg-primary{
+    @apply #edede9 p-4
+}
+.bg-secondary{
+    @apply #d6ccc2 p-4
+}
