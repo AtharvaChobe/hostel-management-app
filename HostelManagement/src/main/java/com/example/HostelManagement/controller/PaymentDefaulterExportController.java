@@ -17,11 +17,11 @@ public class PaymentDefaulterExportController {
     @Autowired
     private PaymentDefaulterExportService paymentDefaulterExportService;
 
-    @GetMapping("/api/payment/defaulter/{month}")
-    public ResponseEntity<byte[]> exportDefaulters(@PathVariable String month) {
+    @GetMapping("/api/payment/defaulter/{month}/{year}")
+    public ResponseEntity<byte[]> exportDefaulters(@PathVariable String month, @PathVariable int year) {
         try {
 
-            ByteArrayInputStream excel = paymentDefaulterExportService.exportData(month);
+            ByteArrayInputStream excel = paymentDefaulterExportService.exportData(month, year);
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Disposition", "attachment; filename=payment_defaulters" + month + ".xlsx");

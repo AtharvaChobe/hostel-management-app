@@ -18,8 +18,8 @@ public class PaymentDefaulterExportService {
     @Autowired
     private PaymentService paymentService;
 
-    public ByteArrayInputStream exportData(String month) throws IOException {
-        List<Hosteler> defaulters = paymentService.findDefaultersByMonth(month);
+    public ByteArrayInputStream exportData(String month, int year) throws IOException {
+        List<Hosteler> defaulters = paymentService.findDefaultersByMonth(month, year);
         Workbook workbook = new XSSFWorkbook();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {

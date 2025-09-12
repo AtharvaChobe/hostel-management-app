@@ -55,7 +55,7 @@ const Home = () => {
     ];
     const getTotalPayments = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/hostelers/month/${monthsArray[new Date().getMonth()].toLowerCase()}`, {
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/hostelers/month/${monthsArray[new Date().getMonth()].toLowerCase()}/${new Date().getFullYear()}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`
           }
@@ -77,7 +77,7 @@ const Home = () => {
 
   const handleExport = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/payment/defaulter/${months[month-1].toLowerCase()}`, {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/payment/defaulter/${months[month-1].toLowerCase()}/${new Date().getFullYear()}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         },

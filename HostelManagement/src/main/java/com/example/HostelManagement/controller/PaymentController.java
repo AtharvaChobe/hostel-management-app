@@ -34,13 +34,13 @@ public class PaymentController {
         return ResponseEntity.ok(paymentService.getPayments(id));
     }
 
-    @GetMapping("/month/{month}")
-    public ResponseEntity<Integer> countByPaymentMonth(@PathVariable String month) {
-        return new ResponseEntity<>(paymentService.countPaymentByMonth(month), HttpStatus.OK);
+    @GetMapping("/month/{month}/{year}")
+    public ResponseEntity<Integer> countByPaymentMonth(@PathVariable String month, @PathVariable int year) {
+        return new ResponseEntity<>(paymentService.countPaymentByMonthandYear(month, year), HttpStatus.OK);
     }
-    @GetMapping("/defaulters/{month}")
-    public ResponseEntity<List<Hosteler>> getDefaulters(@PathVariable String month) {
-        List<Hosteler> defaulters = paymentService.findDefaultersByMonth(month);
+    @GetMapping("/defaulters/{month}/{year}")
+    public ResponseEntity<List<Hosteler>> getDefaulters(@PathVariable String month, @PathVariable int year) {
+        List<Hosteler> defaulters = paymentService.findDefaultersByMonth(month, year);
         return ResponseEntity.ok(defaulters);
     }
 }

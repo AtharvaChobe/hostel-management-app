@@ -61,7 +61,8 @@ const AddPayment = () => {
                 hostelerId: selectedHosteler,
                 month: monthsArray[month - 1].toLowerCase(),
                 amount: amount,
-                paymentDate: new Date()
+                paymentDate: new Date(),
+                year:new Date().getFullYear()
             }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`

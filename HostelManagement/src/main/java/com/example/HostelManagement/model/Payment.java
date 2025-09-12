@@ -63,15 +63,26 @@ public class Payment {
         this.month = month;
     }
 
-    public Payment(String hostelerId, String month, double amount, LocalDate paymentDate) {
-        this.hostelerId = hostelerId;
-        this.month = month;
-        this.amount = amount;
-        this.paymentDate = paymentDate;
-    }
-
     private String hostelerId;
     private String month;
+    private int year;
     private double amount;
     private LocalDate paymentDate;
+
+    public int getYear() {
+        return year;
+    }
+
+    public Payment(String id, LocalDate paymentDate, double amount, int year, String month, String hostelerId) {
+        this.id = id;
+        this.paymentDate = paymentDate;
+        this.amount = amount;
+        this.year = year;
+        this.month = month;
+        this.hostelerId = hostelerId;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
 }

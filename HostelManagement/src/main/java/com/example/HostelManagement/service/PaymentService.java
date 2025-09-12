@@ -19,7 +19,7 @@ public class PaymentService {
     EmailService emailService;
 
     public Payment add(Payment payment) {
-        if (paymentRepository.existsByHostelerIdAndMonth(payment.getHostelerId(), payment.getMonth())) {
+        if (paymentRepository.existsByHostelerIdAndMonthAndYear(payment.getHostelerId(), payment.getMonth(), payment.getYear())) {
             throw new IllegalArgumentException("Payment already exists for this hosteler and month.");
         }
         Payment newPayment = paymentRepository.save(payment);
@@ -38,17 +38,17 @@ public class PaymentService {
         return paymentHistory;
     }
 
-    public int countPaymentByMonth(String month){
+    public int countPaymentByMonthandYear(String month, int year){
 //        System.out.println(repo.countByMonth(month));
-        return paymentRepository.countByMonth(month);
+        return paymentRepository.countByMonthAndYear(month, year);
     }
 
-    public List<Hosteler> findDefaultersByMonth(String month) {
+    public List<Hosteler> findDefaultersByMonth(String month, int year) {
         List<Hosteler> allHostelers = hostelerRepository.findAll();
         List<Hosteler> defaulters = new ArrayList<>();
 
         for (Hosteler hosteler : allHostelers) {
-            boolean hasPaid = paymentRepository.existsByHostelerIdAndMonth(hosteler.getId(), month);
+            boolean hasPaid = paymentRepository.existsByHostelerIdAndMonthAndYear(hosteler.getId(), month, year);
             if (!hasPaid) {
                 defaulters.add(hosteler);
             }

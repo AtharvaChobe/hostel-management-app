@@ -4,9 +4,9 @@ import com.example.HostelManagement.model.Payment;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface PaymentRepository extends MongoRepository<Payment, String> {
-    int countByMonth(String month);
+    int countByMonthAndYear(String month, int year);
 
-    boolean existsByHostelerIdAndMonth(String hostelerId, String month);
+    boolean existsByHostelerIdAndMonthAndYear(String hostelerId, String month, int year);
 
     void deleteByHostelerId(String hostelerId);
 
