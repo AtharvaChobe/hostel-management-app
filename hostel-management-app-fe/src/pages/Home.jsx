@@ -4,6 +4,7 @@ import axios from 'axios'
 import { months } from '../utils/months';
 
 const Home = () => {
+  const [fetching, setfetching] = useState(false);
   const [occupancy, setOccupancy] = useState(0);
   const [capacity, setCapacity] = useState(0);
   const [totalHostelers, settotalHostelers] = useState(0);
@@ -77,7 +78,8 @@ const Home = () => {
 
   const handleExport = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/payment/defaulter/${months[month-1].toLowerCase()}/${new Date().getFullYear()}`, {
+      setfetching(true);
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/payment/defaulter/${months[month - 1].toLowerCase()}/${new Date().getFullYear()}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`
         },
@@ -90,17 +92,19 @@ const Home = () => {
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.setAttribute("download", `defaulters_${months[month-1]}.xlsx`);
+      link.setAttribute("download", `defaulters_${months[month - 1]}.xlsx`);
       document.body.appendChild(link);
       link.click();
     } catch (error) {
       console.log(error)
+    } finally {
+      setfetching(false);
     }
   }
 
   return (
     <div className='flex flex-col gap-4'>
-      <div className='flex flex-row items-center justify-center gap-4'>
+      <div className='flex flex-col sm:flex-row items-center justify-center gap-4'>
         <Chart prop1={capacity} prop2={capacity - occupancy} title1={"Capacity"} title2={"Vacancy"} />
         <Chart prop1={totalHostelers} prop2={totalHostelers - totalPayments} title1={"Total Hostelers"} title2={"Payment defaulters"} />
       </div>
@@ -115,8 +119,8 @@ const Home = () => {
             </option>
           ))}
         </select>
-        <button onClick={handleExport} className="btn">
-          Fetch
+        <button onClick={handleExport} className="btn" disabled={fetching}>
+          {fetching ? "Fetching" : "fetch"}
         </button>
       </div>
     </div>

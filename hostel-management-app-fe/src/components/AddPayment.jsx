@@ -86,9 +86,8 @@ const AddPayment = () => {
         }
     };
 
-
     return (
-        <div className="flex w-full justify-center gap-4 items-center">
+        <div className="flex md:flex-row flex-col w-full justify-center gap-4 items-center">
             <select value={month} onChange={(e) => setMonth(e.target.value)} className="border rounded p-2">
                 {months.map((m, index) => (
                     <option key={index} value={index + 1}>

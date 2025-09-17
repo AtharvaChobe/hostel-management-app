@@ -74,7 +74,7 @@ const Hostelers = () => {
   }
 
   return (
-    <div className='flex flex-col justify-center items-center gap-3'>
+    <div className='flex flex-col justify-center md:text-lg text-xs items-center gap-3'>
       <div className='flex gap-4 items-center justify-between w-full'>
         <input className='border px-3 py-1 rounded'
           type="text" value={searchParam}

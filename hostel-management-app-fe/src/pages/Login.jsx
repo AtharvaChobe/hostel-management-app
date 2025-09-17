@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const navigate = useNavigate();
     const [form, setForm] = useState({ email: "", password: "" });
+    const [logging, setlogging] = useState(false);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -13,6 +14,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            setlogging(true)
             const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, form);
             // console.log(res)
             localStorage.setItem("token", res.data.token);
@@ -22,6 +24,8 @@ const Login = () => {
             window.location.reload();
         } catch (err) {
             alert(err);
+        } finally{
+            setlogging(false)
         }
     };
 
@@ -44,7 +48,7 @@ const Login = () => {
                 placeholder="Password"
                 className="border p-2 rounded"
             />
-            <button className="btn" onClick={handleSubmit}>Login</button>
+            <button disabled={logging} className="btn" onClick={handleSubmit}>{logging ? "Logging you in" : "Login"}</button>
         </div>
     );
 };
